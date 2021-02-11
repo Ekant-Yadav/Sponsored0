@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    {%load static%}
+    <link href="{%static 'home.css'%}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="navbar"><h1>{{title}}</h1></div>
+    <div>
+        <p>city: {% for city in city%} {{ city }} {% endfor %}</p>
+       
+        <p>genere: {% for genere in genere%} {{ genere }} {% endfor %}</p>
+        
+        <p>date: {{ date }}</p>
+        <p>description: {{ description}}</p>
+        <p>advertised: {{advertised}}
+        <p>sponsor:</p>
+        <button>Edit Details</button>
+        <form method="post">
+            {% csrf_token %}
+            <button>Advertise</button>
+        </form>
+    </div>
+</body>
+</html>

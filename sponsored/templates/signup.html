@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    {%load static%}
+    <link href="{%static 'login.css'%}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <nav>
+        <div class="navbar"><h1>Sonsored</h1></div>
+        <h1 style="text-align: center">Signup </h1>
+        <div class=box>
+            <form method="post">
+                {% csrf_token %}
+                username
+                <input type="text" name="username" placeholder="username">
+                email
+                <input type="email" name="email" placeholder="example@gmail.com">
+                location
+                <input type="location" name="location" placeholder="location">
+                password
+                <input type="password" name="password" placeholder="password">
+                profile type
+                <select name='profile'>
+                    <option>organiser</option>
+                    <option>sponsor</Sponsor>
+                </select>
+                <h4></h4>
+                <button type="submit">submit</button>
+                <a href="/">login</a>
+            </form>
+        </div>
+    </nav>
+</body>
+</html>

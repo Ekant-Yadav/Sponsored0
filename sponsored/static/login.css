@@ -1,0 +1,22 @@
+body{
+    margin: 0;
+}
+
+.navbar{
+    color: blueviolet;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.box{
+    margin-left:43%;
+}
+
+input,textarea,select{
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type=checkbox]{
+    display: inline;
+}

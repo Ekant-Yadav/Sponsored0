@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    {%load static%}
+    <link href="{%static 'home.css'%}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="navbar"><h1>Organiser</h1></div>
+    <div class="box">
+        <h2>Your Events</h2>
+        <a href="/newevent"><div class="item">+ Add Events</div></a>
+        {% for title in title %}
+        <a href="/event/{{title}}"><div class="item">{{ title }}</div></a>
+        {% endfor %}
+    </div>
+</body>
