@@ -58,8 +58,7 @@ def add_sponsor(request, pk):
     event = get_object_or_404(Event, pk=pk)
     user = request.user
 
-    success_url = reverse_lazy('event_detail')
-    failure_url = reverse_lazy('add_sponsor')
+    
 
     if request.user.is_anonymous or not(Sponsor.objects.filter(user=user).exists()):
         return redirect('/')
@@ -69,19 +68,24 @@ def add_sponsor(request, pk):
         if 'sponsor' in request.POST:
             if 'add_sponsor' == request.POST.get('sponsor'):
                 event.sponsor = sponsor
-            return redirect(success_url)
-        return redirect(failure_url)
+            return redirect(reverse('event_detail'), kwargs={'pk':pk})
+        return redirect(reverse('add_sponsor', kwargs={'pk':pk}))
 
 class NearByEvents(LoginRequiredMixin, ListView):
 
     model = Event
     template_name = "sponsor.html"
+    context_object_name = 'events'
 
     def get_queryset(self):
-        city = self.kwargs['pk']
+        city = City.objects.get(pk=self.kwargs["pk"])
         return Event.objects.filter(city=city)
+
+
+        queryset = Event.objects.filter(city=self.kwargs["pk"])
 
 class CityList(LoginRequiredMixin, ListView):
 
     model = City
     template_name = "city.html"
+    context_object_name = 'citys'
