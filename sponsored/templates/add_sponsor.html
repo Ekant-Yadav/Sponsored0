@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Choose City</title>
+    <title>Adding Sponsor</title>
     {%load static%}
     <link href="{%static 'home.css'%}" rel="stylesheet" type="text/css" />
   </head>
   <body>
-
     <div class="navbar"><h1>Cities</h1></div>
     <div class="box">
-      <h2>Choose a city</h2>
-        {% for city in citys %}
-            <a href="/sponsor/{{city.pk}}">{{city.city}}<br></a>
-        {% endfor %}
+      <h2>Add Sponsor</h2>
+    </div>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <input type="submit" value="Save" />
+    </form>
   </body>
 </html>

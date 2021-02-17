@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from profiles_api.models import Sponsor, Event, City, Genere, SponsoredEvent
 from django.views import View
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404
@@ -33,9 +33,14 @@ from django.shortcuts import get_object_or_404
     #             context
     # )
 
-class EventDetails(LoginRequiredMixin, DetailView):
+class EventDetails(DetailView):
     model = Event
     template_name = "eventDetailSponsor.html"
+    context_object_name = 'event'
+
+    def get_queryset(self):
+        event = Event.objects.filter(pk=self.kwargs["pk"])
+        return event
     
 
     # def get_context_data(self, **kwargs):
@@ -53,23 +58,30 @@ class EventDetails(LoginRequiredMixin, DetailView):
     #     context['advertised'] = advertised
     #     return context
 
+class AddSponsor(LoginRequiredMixin, UpdateView):
+    model = Event
+    fields = ['sponsor']
+    template_name = 'add_sponsor.html'
 
-def add_sponsor(request, pk):
-    event = get_object_or_404(Event, pk=pk)
-    user = request.user
+    def get_success_url(self):
+        # url = super(AddSponsor, self).get_success_url()
+        url = reverse('event_detail', kwargs={'pk':self.kwargs['pk']})
+        return url
 
-    
+# def add_sponsor(request, pk):
+#     event = get_object_or_404(Event, pk=pk)
+#     user = request.user
 
-    if request.user.is_anonymous or not(Sponsor.objects.filter(user=user).exists()):
-        return redirect('/')
+#     if request.user.is_anonymous or not(Sponsor.objects.filter(user=user).exists()):
+#         return redirect('/')
 
-    else:
-        sponsor = Sponsor.objects.get(user=user)
-        if 'sponsor' in request.POST:
-            if 'add_sponsor' == request.POST.get('sponsor'):
-                event.sponsor = sponsor
-            return redirect(reverse('event_detail'), kwargs={'pk':pk})
-        return redirect(reverse('add_sponsor', kwargs={'pk':pk}))
+#     else:
+#         sponsor = Sponsor.objects.get(user=user)
+#         if 'sponsor' in request.POST:
+#             if 'add_sponsor' == request.POST.get('sponsor'):
+#                 event.sponsor = sponsor
+#             return redirect(reverse('event_detail'), kwargs={'pk':pk})
+#         return redirect(reverse('add_sponsor', kwargs={'pk':pk}))
 
 class NearByEvents(LoginRequiredMixin, ListView):
 
@@ -82,9 +94,7 @@ class NearByEvents(LoginRequiredMixin, ListView):
         return Event.objects.filter(city=city)
 
 
-        queryset = Event.objects.filter(city=self.kwargs["pk"])
-
-class CityList(LoginRequiredMixin, ListView):
+class CityList(ListView):
 
     model = City
     template_name = "city.html"

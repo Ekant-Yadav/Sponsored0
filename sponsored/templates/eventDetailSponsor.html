@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Login</title>
+    <title>Event Details</title>
     {%load static%}
     <link href="{%static 'home.css'%}" rel="stylesheet" type="text/css" />
   </head>
@@ -23,10 +23,15 @@
       </form>
 
       {% if event.sponsor %}
-      <button name="add_sponsor">
-        <a href="{% url 'sponsor:add_sponsor' event.id %}"> Add Sponsor</a>
-      </button>
-      >{% endif %}
+      <p>
+        <form method="POST">
+          {% csrf_token %}
+        <button name="add_sponsor">
+          <a href="{% url 'sponsor:add_sponsor' event.id %}"> Add Sponsor</a>
+        </button>
+        </form>
+      </p>
+      {% endif %}
     </div>
   </body>
 </html>
