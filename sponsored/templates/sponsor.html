@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Login</title>
+  <head>
+    <title>Events</title>
     {%load static%}
-    <link href="{%static 'home.css'%}" rel="stylesheet" type="text/css">
-</head>
-<body>
-    <div class="navbar"><h1>Organiser</h1></div>
+    <link href="{%static 'home.css'%}" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="navbar"><h1>Sponsor</h1></div>
     <div class="box">
-        <h2>Your Events</h2>
-        <a href="/newevent"><div class="item">+ Add Events</div></a>
-        <a href="login/sponsor"><div class="item">Event 1</div></a>
+      <h2>Events Near You</h2>
+
+      {% for e in event %}
+      <a href="/sponsor/event/{{e.pk}}"><div class="item">{{e.title}}</div></a>
+      {% endfor %}
     </div>
-</body>
+  </body>
+</html>

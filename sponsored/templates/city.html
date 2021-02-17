@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Choose City</title>
+    {%load static%}
+    <link href="{%static 'home.css'%}" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+
+    <div class="navbar"><h1>Cities</h1></div>
+    <div class="box">
+      <h2>Choose a city</h2>
+        {% for i in city %}
+            <a href="/sponsor/{{city.pk}}">i</a>
+        {% endfor %}
+  </body>
+</html>
