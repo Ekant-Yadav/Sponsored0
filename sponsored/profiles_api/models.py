@@ -45,6 +45,7 @@ class Event(models.Model):
 
     organiser= models.ForeignKey(Organiser, on_delete=models.CASCADE, null=True, blank=True)
     sponsor= models.ManyToManyField(Sponsor, null=True, blank=True)
+    advertised = models.BooleanField(blank=False, default=False)
 
     def __str__(self):
         return self.title

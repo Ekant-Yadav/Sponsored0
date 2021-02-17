@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home',
-    'profiles_api',
-    'organiser'
+    'home.apps.HomeConfig',
+    'profiles_api.apps.ProfilesApiConfig',
+    'organiser.apps.OrganiserConfig',
+    'sponsor.apps.SponsorConfig',
 ]
 
 MIDDLEWARE = [
