@@ -10,8 +10,13 @@
     <div class="navbar"><h1>Cities</h1></div>
     <div class="box">
       <h2>Choose a city</h2>
-        {% for i in city %}
-            <a href="/sponsor/{{city.pk}}">i</a>
+        {% for city in citys %}
+          <a href="/sponsor/{{city.pk}}">{{city.city}}<br></a>
+        {% endfor %}
+
+        <h2> events near by you <h2>
+        {% for event in event %}
+          <a href="/sponsor/event/{{event.pk}}"><div class="item">{{event.title}}</div></a>
         {% endfor %}
   </body>
 </html>

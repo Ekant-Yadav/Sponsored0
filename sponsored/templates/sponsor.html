@@ -10,8 +10,8 @@
     <div class="box">
       <h2>Events Near You</h2>
 
-      {% for e in event %}
-      <a href="/sponsor/event/{{e.pk}}"><div class="item">{{e.title}}</div></a>
+      {% for event in events %}
+      <a href="/sponsor/event/{{event.pk}}"><div class="item">{{event.title}}</div></a>
       {% endfor %}
     </div>
   </body>

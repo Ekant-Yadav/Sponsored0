@@ -14,19 +14,18 @@
 
       <p>date: {{ event.date }}</p>
       <p>description: {{ event.description}}</p>
-      <!-- <p>advertised: {{advertised}}</p> -->
-      <p>sponsor:</p>
-      <!-- <button>Edit Details</button> -->
+      
       <form method="post">
         {% csrf_token %}
-        <button>Advertise</button>
       </form>
+
+      <textarea placeholder="write message to organiser" name="msg"></textarea><br>
 
       {% if event.sponsor %}
       <button name="add_sponsor">
-        <a href="{% url 'sponsor:add_sponsor' event.id %}"> Add Sponsor</a>
+        <a href="{% url 'sponsor:add_sponsor' event.id %}">Sponsor</a>
       </button>
-      >{% endif %}
+      {% endif %}
     </div>
   </body>
 </html>
