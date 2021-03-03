@@ -4,5 +4,5 @@ from django.urls import path
 
 urlpatterns = [
    path("newevent",views.addevent,name="newevent"),
-   path("event/<slug:slug>", views.event,name="event")
+   path("event/<str:slug>", views.event,name="event")
 ]

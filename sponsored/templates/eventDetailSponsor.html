@@ -8,25 +8,25 @@
   <body>
     <div class="navbar"><h1>{{event.title}}</h1></div>
     <div>
-      <p>city: {{event.city}}</p>
+      <p>city: {{ event.city }}</p>
 
-      <p>genere: {{event.genere}}</p>
+      <p>genere: {{ event.genere }}</p>
 
       <p>date: {{ event.date }}</p>
       <p>description: {{ event.description}}</p>
-      <!-- <p>advertised: {{advertised}}</p> -->
-      <p>sponsor:</p>
-      <!-- <button>Edit Details</button> -->
-      <form method="post">
-        {% csrf_token %}
-        <button>Advertise</button>
-      </form>
+
+      <form method="post">{% csrf_token %}</form>
+
+      <textarea placeholder="write message to organiser" name="msg"></textarea
+      ><br />
 
       {% if event.sponsor %}
       <button name="add_sponsor">
-        <a href="{% url 'sponsor:add_sponsor' event.id %}"> Add Sponsor</a>
+        <a href="{% url 'sponsor:add_sponsor' event.id %}">Sponsor</a>
       </button>
-      >{% endif %}
+      {% endif %}
+
+      <h4><a href="{% url 'sponsor:sponsored_events' %}">My Sponsoreds</a></h4>
     </div>
   </body>
 </html>

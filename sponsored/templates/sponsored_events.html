@@ -9,16 +9,9 @@
 
     <div class="navbar"><h1>Cities</h1></div>
     <div class="box">
-      <h2>Choose a city</h2>
-        {% for city in citys %}
-          <a href="/sponsor/{{city.pk}}">{{city.city}}<br></a>
-        {% endfor %}
-
-        <h2> Events Near By Me <h2>
-        {% for event in near_events %}
+        <h2> My Sponsoreds <h2>
+        {% for event in events %}
           <a href="/sponsor/event/{{event.pk}}"><div class="item">{{event.title}}</div></a>
         {% endfor %}
-
-        <h4><a href="{% url 'sponsor:sponsored_events' %}">My Sponsoreds</a></h4>
   </body>
 </html>

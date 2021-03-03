@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
-from .models import Sponsor, Organiser
+from .models import Sponsor, Organiser, City
 from django.contrib.auth import login, logout, authenticate
 
 def loginuser(request,slug):
@@ -22,6 +22,7 @@ def loginuser(request,slug):
     return render(request,'login.html',context)
 
 def signupuser(request):
+    context = {'city': City.objects.all()}
     if request.method=="POST":
         username= request.POST.get('username')
         password= request.POST.get('password')
@@ -33,15 +34,19 @@ def signupuser(request):
         myuser.set_password(password)
         myuser.save()
         
+        city = City.objects.get(city=location)
         if profile == "organiser":
-            organiser = Organiser(user=myuser, location=location)
+            organiser = Organiser(user=myuser)
+            organiser.location = city
             organiser.save()
         if profile == "sponsor":
-            sponsor = Sponsor(user=myuser, location=location)
+            sponsor = Sponsor(user=myuser)
+            sponsor.location = city
             sponsor.save()    
         
 
         user= authenticate(username=username, password=password)
         login(request, user)
-        return redirect("/organiser")
-    return render(request,'signup.html')
+        goto = "/"+ profile
+        return redirect(goto)
+    return render(request,'signup.html',context)

@@ -17,7 +17,11 @@
                 email
                 <input type="email" name="email" placeholder="example@gmail.com">
                 location
-                <input type="location" name="location" placeholder="location">
+                <select type="location" name="location" placeholder="location">
+                    {% for city in city %}
+                    <option value="{{city}}">{{city}}</option>
+                    {% endfor %}
+                </select>
                 password
                 <input type="password" name="password" placeholder="password">
                 profile type

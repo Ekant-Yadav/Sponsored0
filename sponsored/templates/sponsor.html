@@ -8,13 +8,15 @@
   <body>
     <div class="navbar"><h1>Sponsor</h1></div>
     <div class="box">
-      <h2>Events Near You</h2>
+      <h2>Events in {{city}}</h2>
 
       {% for event in events %}
       <a href="/sponsor/event/{{event.pk}}"
         ><div class="item">{{event.title}}</div></a
       >
       {% endfor %}
+
+      <h4><a href="{% url 'sponsor:sponsored_events' %}">My Sponsoreds</a></h4>
     </div>
   </body>
 </html>
