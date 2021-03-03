@@ -2,12 +2,17 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
+class City(models.Model):
+    city = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.city
 
 class Organiser(models.Model):
     # Add city field to the User model
 
     user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='+')
-    location = models.CharField(max_length=50)
+    location = models.ForeignKey(City, on_delete=models.CASCADE, related_name='+')
 
     def __str__(self):
         return self.user.username
@@ -16,16 +21,10 @@ class Sponsor(models.Model):
     # Add city field to the User model
 
     user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='+')
-    location = models.CharField(max_length=50)
+    location = models.ForeignKey(City, on_delete=models.CASCADE, related_name='+')
 
     def __str__(self):
         return self.user.username
-
-class City(models.Model):
-    city = models.CharField(max_length=25)
-
-    def __str__(self):
-        return self.city
 
 class Genere(models.Model):
     genere = models.CharField(max_length=25)
@@ -45,6 +44,7 @@ class Event(models.Model):
 
     organiser= models.ForeignKey(Organiser, on_delete=models.CASCADE, null=True, blank=True)
     sponsor= models.ManyToManyField(Sponsor, null=True, blank=True)
+    advertised = models.BooleanField(blank=False, default=False)
 
     def __str__(self):
         return self.title
