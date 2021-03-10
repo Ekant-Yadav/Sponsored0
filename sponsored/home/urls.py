@@ -7,6 +7,7 @@ urlpatterns = [
     path('',views.index,name="index"),
     path("login/<str:slug>",apiviews.loginuser,name="login"),
     path("signup",apiviews.signupuser,name="signup"),
-    path("organiser", orgviews.events, name="organiser")
+    path("organiser", orgviews.events, name="organiser"),
+    path("logout", apiviews.logoutuser, name="logout")
 ]
  

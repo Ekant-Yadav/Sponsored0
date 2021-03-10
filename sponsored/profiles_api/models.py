@@ -48,9 +48,3 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
-
-class SponsoredEvent(models.Model):
-    event = models.OneToOneField(Event, on_delete=models.CASCADE,related_name='+')
-
-    def __str__(self):
-        return self.event.title

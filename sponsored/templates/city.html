@@ -15,8 +15,12 @@
         {% endfor %}
 
         <h2> events near by you <h2>
-        {% for event in event %}
+        {% for event in near_events %}
           <a href="/sponsor/event/{{event.pk}}"><div class="item">{{event.title}}</div></a>
         {% endfor %}
+
+        <h4><a href="{% url 'sponsor:sponsored_events' %}">My Sponsoreds</a></h4>
+        <hr>
+        <button><a href="/logout">Logout</a></button>
   </body>
 </html>

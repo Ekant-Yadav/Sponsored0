@@ -50,3 +50,7 @@ def signupuser(request):
         goto = "/"+ profile
         return redirect(goto)
     return render(request,'signup.html',context)
+
+def logoutuser(request):
+    logout(request)
+    return redirect("/")

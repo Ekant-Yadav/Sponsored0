@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-from profiles_api.models import Organiser,Event,City,Genere,Organiser,Sponsor,SponsoredEvent
+from profiles_api.models import Organiser,Event,City,Genere,Organiser,Sponsor
 from .forms import EventForm
 
 def events(request):
@@ -39,7 +39,7 @@ def event(request, slug):
     else:
         org = Organiser.objects.get(user=myuser)
         evenT= Event.objects.get(title=slug, organiser=org)
-        if SponsoredEvent.objects.filter(event=evenT).exists():
+        if evenT.advertised:
             advertised="YES"
         else:
             advertised="NO"
@@ -53,8 +53,6 @@ def event(request, slug):
             'sponsor':Sponsor.objects.filter(event=evenT)
         }
         if request.method=="POST":
-            if not(SponsoredEvent.objects.filter(event=evenT).exists()):
-                sponsoredevent= SponsoredEvent(event=evenT)
-                sponsoredevent.save()
-            return redirect('/event/'+evenT.title)
+            evenT.advertised = True
+            evenT.save(update_fields=['advertised'])
         return render(request,'event.html',context)

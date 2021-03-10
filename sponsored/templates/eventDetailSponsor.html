@@ -17,15 +17,17 @@
       
       <form method="post">
         {% csrf_token %}
-      </form>
-
+      
       <textarea placeholder="write message to organiser" name="msg"></textarea><br>
 
       {% if event.sponsor %}
-      <button name="add_sponsor">
-        <a href="{% url 'sponsor:add_sponsor' event.id %}">Sponsor</a>
+      <button type = "submit" name="add_sponsor">
+       Sponsor
       </button>
       {% endif %}
+      </form>
     </div>
+    <hr>
+    <button><a href="/logout">Logout</a>/<button>
   </body>
 </html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Choose City</title>
+    {%load static%}
+    <link href="{%static 'home.css'%}" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+
+    <div class="navbar"><h1>My Sponsored</h1></div>
+    <div class="box">
+        <h2> An email has been sent to organisers of following events wait for reply! <h2>
+        {% for event in events %}
+          <a href="/sponsor/event/{{event.pk}}"><div class="item">{{event.title}}</div></a>
+        {% endfor %}
+  </body>
+  <hr>
+        <button><a href="/logout">Logout</a></button>
+</html>
